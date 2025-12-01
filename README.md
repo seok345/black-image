@@ -122,22 +122,3 @@ torch.serialization.add_safe_globals를 사용하여 Recorder, Hook, Conv2d 등 
 모델 선택 옵션: 'Artistic' 모델 외에 원본을 최대한 보존하는 'Stable' 모델 선택 기능 추가.
 
 클라우드 배포: Docker 컨테이너화를 통해 AWS나 Google Cloud Platform에 배포하여 외부 접속 허용.
-
-## 라이선스 및 크레딧
-
-이 프로젝트는 Jason Antic이 개발한 DeOldify 오픈소스 프로젝트를 기반으로 합니다.
-
-본 웹 애플리케이션 코드는 학습 및 포트폴리오 목적으로 작성되었습니다.
-
- ## 디렉토리 구조 (Directory Structure)
-
-```text
-Project_Root/
-├── app.py               # [핵심] Flask 서버 메인 코드
-├── templates/           # [Frontend] HTML 템플릿 폴더
-│   └── index.html       # 사용자 인터페이스 (UI) 파일
-├── static/              # [Frontend] CSS, JS, 이미지 등 정적 파일
-├── uploads/             # [Data] 업로드 및 변환된 이미지 저장소
-├── models/              # [Model] DeOldify 학습 모델(.pth) 저장소
-│   └── ColorizeArtistic_gen.pth
-└── README.md            # 프로젝트 설명서
