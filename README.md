@@ -1,10 +1,10 @@
-# AI 흑백 사진 컬러 복원 웹 애플리케이션 (DeOldify Web Service)
+# AI 흑백 사진 컬러 복원 웹 애플리케이션 
 
 Deep Learning based Image Colorization Project
 
 흑백 이미지에 생명을 불어넣다: DeOldify와 Flask를 활용한 고해상도 이미지 복원 서비스
 
-## 프로젝트 개요 (Project Overview)
+## 프로젝트 개요 
 
 ### 1. 배경 및 목적
 
@@ -18,7 +18,7 @@ Deep Learning based Image Colorization Project
 
 기술적 해결(Problem Solving): 레거시 AI 모델(FastAI v1)과 최신 실행 환경(PyTorch v2) 간의 호환성 문제를 기술적으로 해결하여 안정적인 서비스를 제공합니다.
 
-## 주요 기능 (Key Features)
+## 주요 기능 
 
 이미지 업로드 및 전처리: 사용자가 업로드한 다양한 포맷(JPG, PNG)의 이미지를 서버에서 안전하게 수신하고 모델 입력에 맞게 전처리합니다.
 
@@ -28,7 +28,7 @@ AI 기반 자동 채색: DeOldify 모델이 이미지의 객체와 맥락(Contex
 
 고해상도 다운로드: 변환된 결과물을 저장이 가능한 고화질 이미지 파일로 제공합니다.
 
-## 기술 스택 (Tech Stack)
+## 기술 스택 
 
 본 프로젝트는 안정적인 백엔드 처리와 강력한 AI 성능을 위해 다음과 같은 기술을 사용했습니다.
 
@@ -52,15 +52,15 @@ HTML5 & CSS3: 시맨틱 마크업과 스타일링을 담당합니다.
 
 Tailwind CSS: 유틸리티 퍼스트 CSS 프레임워크를 사용하여 반응형 디자인과 모던한 UI를 신속하게 구현했습니다.
 
-## 설치 및 실행 가이드 (Installation & Usage)
+## 설치 및 실행 가이드
 
 이 프로젝트는 DeOldify 모델의 특성상 특정 라이브러리 버전과의 의존성이 매우 중요합니다. 아래 절차를 정확히 따라주세요.
 
-### 1. 환경 설정 (Prerequisites)
+### 1. 환경 설정
 
 Python 3.7 이상이 설치된 환경에서 진행하는 것을 권장합니다. 충돌 방지를 위해 가상환경(Virtual Environment) 사용을 추천합니다.
 
-### 가상환경 생성 (예: conda 또는 venv)
+### 가상환경 생성
 conda create -n colorization python=3.8
 conda activate colorization
 
@@ -79,7 +79,7 @@ pip install deoldify fastai==1.0.61
 
 주의: GPU(CUDA)를 사용하려면 시스템에 맞는 PyTorch 버전을 확인해야 합니다. 일반적인 CPU 환경에서는 위 명령어로 충분합니다.
 
-### 3. 모델 가중치(Weights) 준비
+### 3. 모델 가중치 준비
 
 AI 모델이 학습한 데이터 파일이 필요합니다.
 
@@ -107,11 +107,11 @@ Project_Root/
 
 
 
-## 트러블슈팅 및 기술적 챌린지 (Troubleshooting)
+## 트러블슈팅 및 기술적 챌린지 
 
 개발 과정에서 발생한 주요 기술적 문제와 이를 해결한 과정입니다.
 
-### Issue 1: PyTorch 보안 정책 충돌 (WeightsUnpickler error)
+### Issue 1: PyTorch 보안 정책 충돌 
 
 현상: 최신 버전의 PyTorch(2.6+) 환경에서 구형 모델 파일(pickle 방식)을 로드할 때, 보안상의 이유로 functools.partial 등의 내부 객체 로딩이 차단되어 에러 발생.
 
@@ -123,13 +123,13 @@ app.py 코드 내에서 torch.load 함수를 오버라이딩(Monkey Patching)하
 
 torch.serialization.add_safe_globals를 사용하여 Recorder, Hook, Conv2d 등 모델에 사용된 클래스들을 안전한 리스트(Allowlist)에 등록하여 호환성 확보.
 
-### Issue 2: 라이브러리 버전 비호환성 (Dependency Hell)
+### Issue 2: 라이브러리 버전 비호환성 
 
 현상: pip install fastai로 최신 버전을 설치할 경우, DeOldify 코드 내부에서 사용하는 모듈 경로와 API가 달라 실행 불가.
 
 해결: fastai==1.0.61로 버전을 명시적으로 고정(Pinning)하여 DeOldify가 의도한 실행 환경을 정확히 재현함.
 
-### 향후 발전 계획 (Future Roadmap)
+### 향후 발전 계획
 
 비디오 컬러 복원: 단일 이미지를 넘어 흑백 동영상 파일(MP4)을 프레임 단위로 변환하여 합치는 기능 추가.
 
@@ -137,7 +137,7 @@ torch.serialization.add_safe_globals를 사용하여 Recorder, Hook, Conv2d 등 
 
 클라우드 배포: Docker 컨테이너화를 통해 AWS나 Google Cloud Platform에 배포하여 외부 접속 허용.
 
-## 라이선스 및 크레딧 (License & Credits)
+## 라이선스 및 크레딧
 
 이 프로젝트는 Jason Antic이 개발한 DeOldify 오픈소스 프로젝트를 기반으로 합니다.
 
