@@ -93,22 +93,6 @@ AI 모델이 학습한 데이터 파일이 필요합니다.
 
 웹 브라우저를 열고 http://127.0.0.1:5000에 접속하여 흑백 사진을 업로드하세요.
 
- 디렉토리 구조 (Directory Structure)
-
-```text
-Project_Root/
-├── app.py               # [핵심] Flask 서버 메인 코드
-├── templates/           # [Frontend] HTML 템플릿 폴더
-│   └── index.html       # 사용자 인터페이스 (UI) 파일
-├── static/              # [Frontend] CSS, JS, 이미지 등 정적 파일
-├── uploads/             # [Data] 업로드 및 변환된 이미지 저장소
-├── models/              # [Model] DeOldify 학습 모델(.pth) 저장소
-│   └── ColorizeArtistic_gen.pth
-└── README.md            # 프로젝트 설명서
-'''
-
-
-
 ## 트러블슈팅 및 기술적 챌린지 
 
 개발 과정에서 발생한 주요 기술적 문제와 이를 해결한 과정입니다.
@@ -144,3 +128,16 @@ torch.serialization.add_safe_globals를 사용하여 Recorder, Hook, Conv2d 등 
 이 프로젝트는 Jason Antic이 개발한 DeOldify 오픈소스 프로젝트를 기반으로 합니다.
 
 본 웹 애플리케이션 코드는 학습 및 포트폴리오 목적으로 작성되었습니다.
+
+ ## 디렉토리 구조 (Directory Structure)
+
+```text
+Project_Root/
+├── app.py               # [핵심] Flask 서버 메인 코드
+├── templates/           # [Frontend] HTML 템플릿 폴더
+│   └── index.html       # 사용자 인터페이스 (UI) 파일
+├── static/              # [Frontend] CSS, JS, 이미지 등 정적 파일
+├── uploads/             # [Data] 업로드 및 변환된 이미지 저장소
+├── models/              # [Model] DeOldify 학습 모델(.pth) 저장소
+│   └── ColorizeArtistic_gen.pth
+└── README.md            # 프로젝트 설명서
