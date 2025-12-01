@@ -115,6 +115,10 @@ torch.serialization.add_safe_globals를 사용하여 Recorder, Hook, Conv2d 등 
 
 해결: fastai==1.0.61로 버전을 명시적으로 고정(Pinning)하여 DeOldify가 의도한 실행 환경을 정확히 재현함.
 
+![페이지 처음 화면](images/1.jpg)
+![로딩 화면 ](images/2.jpg)
+![결과 화면](images/3.jpg)
+
 ### 향후 발전 계획
 
 비디오 컬러 복원: 단일 이미지를 넘어 흑백 동영상 파일(MP4)을 프레임 단위로 변환하여 합치는 기능 추가.
