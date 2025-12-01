@@ -95,15 +95,16 @@ AI 모델이 학습한 데이터 파일이 필요합니다.
 
  디렉토리 구조 (Directory Structure)
 
+```text
 Project_Root/
-|-- app.py               # [핵심] Flask 서버 메인 코드
-|-- templates/           # [Frontend] HTML 템플릿 폴더
-|   `-- index.html       # 사용자 인터페이스 (UI) 파일
-|-- static/              # [Frontend] CSS, JS, 이미지 등 정적 파일
-|-- uploads/             # [Data] 업로드 및 변환된 이미지 저장소
-|-- models/              # [Model] DeOldify 학습 모델(.pth) 저장소
-|   `-- ColorizeArtistic_gen.pth
-`-- README.md            # 프로젝트 설명서
+├── app.py               # [핵심] Flask 서버 메인 코드
+├── templates/           # [Frontend] HTML 템플릿 폴더
+│   └── index.html       # 사용자 인터페이스 (UI) 파일
+├── static/              # [Frontend] CSS, JS, 이미지 등 정적 파일
+├── uploads/             # [Data] 업로드 및 변환된 이미지 저장소
+├── models/              # [Model] DeOldify 학습 모델(.pth) 저장소
+│   └── ColorizeArtistic_gen.pth
+└── README.md            # 프로젝트 설명서
 
 
 
