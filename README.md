@@ -19,7 +19,7 @@
 ## 🔵 (A) OpenCV Colorization (Caffe Model)
 
 <div align="center">
-<img src="6.png" width="600">
+<img src="image/6.png" width="600">
 </div>
 
 ### ✔ 장점  
@@ -40,7 +40,7 @@ https://github.com/richzhang/colorization/tree/master/models
 ## 🟣 (B) DeOldify (최종 채택)
 
 <div align="center">
-<img src="4.png" width="600">
+<img src="image/4.png" width="600">
 </div>
 
 ### ✔ 장점  
@@ -76,21 +76,21 @@ https://github.com/richzhang/colorization/tree/master/models
 
 ## ✔ 초기 화면(UI)
 <div align="center">
-<img src="1.png" width="700">
+<img src="image/1.png" width="700">
 </div>
 
 ---
 
 ## ✔ 업로드 후 처리 화면
 <div align="center">
-<img src="2.png" width="700">
+<img src="image/2.png" width="700">
 </div>
 
 ---
 
 ## ✔ 최종 컬러 복원 결과
 <div align="center">
-<img src="3.png" width="700">
+<img src="image/3.png" width="700">
 </div>
 
 ---
@@ -98,7 +98,7 @@ https://github.com/richzhang/colorization/tree/master/models
 # 📌 5. 사용하지 않은 OpenCV 모델 실패 사례
 
 <div align="center">
-<img src="6.png" width="650">
+<img src="image/6.png" width="650">
 </div>
 
 위와 같이 **검정 화면 출력 문제**, 색상 오류 등으로 인해  
@@ -109,7 +109,7 @@ OpenCV 기반 방식은 최종 서비스에서 제외했다.
 # 📌 6. 전체 동작 구조 (개발 환경 화면 포함)
 
 <div align="center">
-<img src="7.png" width="750">
+<img src="image/7.png" width="750">
 </div>
 
 ---
