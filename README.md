@@ -81,7 +81,7 @@
 
 OpenCV 대비 아래와 같은 향상 효과가 나타났다:
 
-<img src="image/4.png" width="700">
+<img src="image/9.png" width="700">
 
 | 항목 | OpenCV 모델 | DeOldify 모델 |
 |------|-------------|---------------|
