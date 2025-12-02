@@ -95,7 +95,7 @@ OpenCV 대비 아래와 같은 향상 효과가 나타났다:
 ---
 
 # 📌 5. 최종 웹 서비스 구조  
-<img src="image/7.png" width="700">
+<img src="image/10.png" width="700">
 
 ---
 
