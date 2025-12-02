@@ -108,7 +108,7 @@ OpenCV 대비 아래와 같은 향상 효과가 나타났다:
 <img src="image/2.png" width="700">
 
 ## 최종 컬러 복원 결과  
-<img src="image/3.png" width="700">
+<img src="image/11.png" width="700">
 
 ---
 
