@@ -1,67 +1,95 @@
-# AI 흑백 사진 컬러 복원 보고서 (확장본)
-
-이 보고서는 사용자가 제공한 실제 UI 캡처 이미지와 예시 입력 사진을 포함하여 OpenCV vs DeOldify 모델 비교, 웹 UI 동작 흐름, 프로젝트 구조 등을 종합적으로 정리한 문서이다.
+# 🎨 AI 흑백 사진 컬러 복원 보고서 (최종 확장본)
 
 ---
 
-## 📌 Q1. 흑백 → 컬러 복원 품질 비교 (모델 성능 분석)
+# 📌 1. 프로젝트 개요
 
-### 🔹 입력된 흑백 이미지 예시
-<img src="image/q1_input.png" width="600">
+흑백 사진은 시간의 흐름을 간직하고 있지만 색채 정보가 부족하여 당시의 감정·분위기를 충분히 전달하지 못한다.  
+본 프로젝트는 딥러닝 기반 색 복원 기술을 활용하여 흑백 이미지를 고품질 컬러 이미지로 변환하는 데 목적이 있다.
 
-### 🔹 DeOldify 복원 결과 예시
-<img src="image/q1_output.png" width="600">
-
-(※ 실제 이미지는 사용자가 제공한 예시 이미지에 맞게 교체 가능)
+초기에는 **OpenCV Colorization**을 사용했지만, 품질적 한계(저해상도, 문맥 이해 부족, 색 번짐) 때문에  
+최종적으로 **DeOldify GAN 기반 모델**을 채택하였다.
 
 ---
 
-## 📌 Q2. 웹 UI 캡처 기반 흐름 설명
+# 📌 2. 모델 비교 (OpenCV vs DeOldify)
 
-### 1) 메인 업로드 화면
-<img src="image/ui_main.png" width="700">
+## 🧠 핵심 기술 구조 차이
 
-**설명:**  
-사용자가 이미지를 업로드하고 ‘컬러 변환 시작하기’ 버튼을 눌러 변환을 시작한다.
-
----
-
-### 2) 로딩 화면 (AI 처리 중)
-<img src="image/ui_loading.png" width="700">
-
-**설명:**  
-DeOldify 모델이 GPU/CPU 환경에서 이미지에 대한 색 정보를 생성한다.  
-처리 시간: 약 10~30초
+| 항목 | OpenCV Colorization | DeOldify |
+|------|----------------------|----------|
+| 기반 기술 | Caffe CNN | GAN / NoGAN (Generator + Discriminator) |
+| 색공간 | Lab(L 채널 입력 → a·b 채널 예측) | RGB 기반 문맥 이해 색 생성 |
+| 문맥 이해 | 없음 | 뛰어남 |
+| 색 품질 | 단조롭고 회색 톤 | 자연스럽고 예술적 |
+| 해상도 처리 | 저해상도 중심 | 고해상도 안정 처리 |
+| 오류 발생 | 검정 화면 / 색 누락 | 거의 없음 |
+| 처리 속도 | 빠름 | 상대적으로 느림 |
+| 서비스 적합도 | 낮음 | 매우 높음 |
 
 ---
 
-### 3) 변환 결과 비교 화면
-<img src="image/ui_compare1.png" width="700">
-<img src="image/ui_compare2.png" width="700">
-<img src="image/ui_compare3.png" width="700">
+# 📌 3. OpenCV 복원 방식과 한계
 
-**설명:**  
-흑백(original) 이미지와 컬러(colorized) 이미지가 나란히 표시되며 다운로드 기능도 제공한다.
+### 🔧 작동 방식 요약
+- Lab 색공간 변환 후 L 채널만 입력
+- 모델이 a·b 색값을 예측
+- L + a·b 조합하여 색상을 얹는 단순 방식
 
----
+### ❌ 한계
+- 문맥 이해 불가 → 인물, 배경, 사물을 분리하지 못함  
+- 피부/하늘/식물 등 의미 기반 색상 복원이 불가능  
+- 고해상도 입력 시 색 반영 실패  
+- 아래와 같은 사례(=검정화) 빈번히 발생함
 
-## 📌 Q3. 추가 예시 이미지 활용 (풍경/인물)
-
-### 🔹 풍경 이미지 컬러 복원
-<img src="image/landscape_bw.png" width="700">
-<img src="image/landscape_color.png" width="700">
-
-### 🔹 도시 이미지 컬러 복원
-<img src="image/city_bw.png" width="700">
-<img src="image/city_color.png" width="700">
-
-### 🔹 인물 사진 복원
-<img src="image/portrait_bw.png" width="600">
-<img src="image/portrait_color.png" width="600">
+<img src="6 (1).png" width="700">
 
 ---
 
-## 📌 프로젝트 구조 (최종)
+# 📌 4. DeOldify 복원 기술과 강점
+
+### ✨ 핵심 기술
+- GAN 기반 학습: Generator가 사진을 복원하며 Discriminator가 품질을 평가
+- NoGAN 기법: GAN의 불안정성을 줄이고 색 안정성 확보
+- ResNet 기반 인코더로 고해상도·고품질 복원 가능
+
+### 🌈 장점
+- 자연스럽고 생생한 색감
+- 인물 사진 복원 성능 탁월
+- 풍경/건물/배경 색조합 현실적
+- UI 서비스에 안정적으로 적용 가능
+
+<img src="5.png" width="700">
+
+---
+
+# 📌 5. 웹 서비스 흐름 (UI 단계별 이미지 포함)
+
+## ① 업로드 화면
+<img src="1.png" width="700">
+
+## ② 로딩/처리 화면
+<img src="2.png" width="700">
+
+## ③ 결과 비교 화면
+<img src="3.png" width="700">
+
+---
+
+# 📌 7. 기술적 트러블슈팅
+
+### ✔ PyTorch & FastAI 호환성 문제
+- 최신 PyTorch는 보안 정책상 pickle 기반 모델 로딩을 제한
+- DeOldify는 FastAI 1.x 객체(CALLBACK, HOOK)를 필요로 함  
+**해결:** `torch.load()` monkey patching + safe globals 등록
+
+### ✔ GPU 메모리 이슈
+- 고해상도 입력 이미지 처리 시 OOM 발생  
+**해결:** render_factor 조정 또는 CPU fallback
+
+---
+
+# 📌 8. 프로젝트 디렉토리 구조
 
 ```
 Colorize-App/
@@ -82,5 +110,13 @@ Colorize-App/
 ├── result_images/
 └── README.md
 ```
+
+---
+
+# 📌 9. 결론
+
+OpenCV는 빠르고 가볍지만, 현대적 컬러 복원 품질을 충족시키지 못한다.  
+반면 DeOldify는 문맥 기반 색 생성 능력과 고품질 결과로 인해  
+**서비스용 AI 컬러 복원 모델로 가장 적합한 선택**이다.
 
 ---
