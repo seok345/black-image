@@ -1,135 +1,162 @@
 
 # 🎨 AI 흑백 사진 컬러 복원 웹 애플리케이션  
-### *DeOldify vs OpenCV — 모델 비교 + 웹 서비스 구현 보고서 (모델 다운로드 링크 포함)*
-
----
-
-# ⚠️ 작성 규칙  
-- 평어체(~이다, ~한다) 사용  
-- 경어체 금지  
-- 이미지 자료 적극 활용  
+### *DeOldify vs OpenCV — 모델 비교 + 이미지 포함 보고서 (다운로드 링크 포함)*
 
 ---
 
 # 📌 1. 프로젝트 개요
 
-본 프로젝트는 두 가지 AI 채색 방식을 비교한 뒤, 최종적으로 **DeOldify 모델을 기반으로 한 고화질 컬러 복원 웹 서비스**를 구현하는 것이다.
+흑백 사진은 색상 정보가 없어 감정 전달력이 떨어진다.  
+본 프로젝트에서는 두 가지 AI 컬러 복원 모델(OpenCV, DeOldify)을 비교하고  
+최종적으로 **DeOldify 기반 고품질 복원 웹 서비스**를 구현한다.
+
+> 아래는 모델 비교 및 동작 사진이 포함된 전체 과정 설명이다.
 
 ---
 
-# 📌 2. 사용된 두 가지 모델
+# 📌 2. 사용 모델 비교 (설명 + 이미지 한눈에 보기)
 
-## 🔵 (A) OpenCV Colorization 모델  
-- Caffe 기반  
-- 속도 빠름  
-- 품질 낮음  
+## 🔵 (A) OpenCV Colorization (Caffe Model)
+
+<div align="center">
+<img src="6.png" width="600">
+</div>
+
+### ✔ 장점  
+- 속도 매우 빠름  
+- GPU 없이도 동작  
+
+### ✔ 단점  
+- 색이 탁함  
+- 디테일 부족  
 - 고해상도 불가  
+- 실패 사례 다수 발생  
 
-필요 파일:
-- `colorization_deploy_v2.prototxt`
-- `colorization_release_v2.caffemodel`
-- `pts_in_hull.npy`
-
-🔗 **OpenCV 공식 모델 다운로드 링크 (Caffe Model)**  
+### 🔗 모델 다운로드 링크  
 https://github.com/richzhang/colorization/tree/master/models
 
 ---
 
-## 🟣 (B) DeOldify (최종 선택 모델)  
-- GAN/NoGAN 구조  
-- ResNet34 기반  
-- 매우 자연스러운 색감  
-- 고해상도 복원 가능  
-- 웹 서비스와 궁합이 좋음  
+## 🟣 (B) DeOldify (최종 채택)
 
-필요 파일:  
-- `ColorizeArtistic_gen.pth`
+<div align="center">
+<img src="4.png" width="600">
+</div>
 
-🔗 **DeOldify 공식 모델 다운로드 링크**  
-- Artistic 모델 (ColorizeArtistic_gen.pth):  
-  https://deepai.org/machine-learning-model/colorizer  
-- Stable 모델 (ColorizeStable_gen.pth):  
-  https://github.com/jantic/DeOldify
+### ✔ 장점  
+- 얼굴·배경·재질 복원 능력 뛰어남  
+- 자연스러운 색감  
+- 고해상도 지원  
+- 실서비스에 적합  
+
+### ✔ 단점  
+- 속도 느림  
+- FastAI 1.x 의존성 강함  
+
+### 🔗 모델 다운로드 링크  
+- Artistic 모델: https://deepai.org/machine-learning-model/colorizer  
+- Stable 모델: https://github.com/jantic/DeOldify
 
 ---
 
-# 📌 3. 모델 비교
+# 📌 3. 모델 비교 표
 
-| 항목 | OpenCV 모델 | DeOldify 모델 |
-|------|-------------|---------------|
+| 항목 | OpenCV | DeOldify |
+|------|--------|----------|
 | 색감 품질 | 낮음 | 매우 우수 |
-| 고해상도 | 불가 | 가능 |
-| 얼굴 복원 | 많이 부족함 | 크게 우수함 |
-| 속도 | 매우 빠름 | 상대적으로 느림 |
-| 설치 난이도 | 쉬움 | 어려움 (버전 의존성 큼) |
+| 얼굴 복원 | 부족함 | 매우 뛰어남 |
+| 해상도 | 제한적 | 고해상도 가능 |
+| 속도 | 빠름 | 느림 |
+| 설치 난이도 | 쉬움 | 중간~어려움 |
 | 웹 서비스 적합성 | 낮음 | 매우 높음 |
 
 ---
 
-# 📸 4. 예시 이미지
+# 📸 4. 서비스 작동 화면 (설명 + 이미지 구성)
 
-## OpenCV 모델 실패 사례
-<img src="6.png" width="700">
-
-## DeOldify 모델 성공 사례
-<img src="4.png" width="700">
-
----
-
-# 📌 5. 웹 서비스 UI
-
-## 초기 화면  
+## ✔ 초기 화면(UI)
+<div align="center">
 <img src="1.png" width="700">
-
-## 변환 결과 화면  
-<img src="2.png" width="700">
-
-## 컬러 복원 결과  
-<img src="3.png" width="700">
+</div>
 
 ---
 
-# 📌 6. 기술적 문제 해결
+## ✔ 업로드 후 처리 화면
+<div align="center">
+<img src="2.png" width="700">
+</div>
 
-## 🔧 PyTorch 보안 정책 문제 해결  
-PyTorch 2.x에서 `.pth` 파일 로딩 오류 발생 →  
-`torch.load()` monkey-patching 후 `weights_only=False` 강제 적용  
+---
 
-## 🔧 FastAI 1.x 환경 복원  
-DeOldify 원본이 FastAI 1.x 기반 →  
-버전 고정 필요:
+## ✔ 최종 컬러 복원 결과
+<div align="center">
+<img src="3.png" width="700">
+</div>
+
+---
+
+# 📌 5. 사용하지 않은 OpenCV 모델 실패 사례
+
+<div align="center">
+<img src="6.png" width="650">
+</div>
+
+위와 같이 **검정 화면 출력 문제**, 색상 오류 등으로 인해  
+OpenCV 기반 방식은 최종 서비스에서 제외했다.
+
+---
+
+# 📌 6. 전체 동작 구조 (개발 환경 화면 포함)
+
+<div align="center">
+<img src="7.png" width="750">
+</div>
+
+---
+
+# 📌 7. 기술적 문제 해결
+
+## 🔧 PyTorch 2.x 보안 정책 문제  
+- `.pth` 모델 로드 시 pickle 구조 차단 → DeOldify 모델 로딩 실패  
+- `torch.load()` monkey-patching 하여 해결  
+- `weights_only=False` 강제 적용  
+
+## 🔧 FastAI 1.x 의존성  
+- DeOldify는 FastAI 1.x 기반 모델  
+- 최신 버전 FastAI와 호환 X  
+- 버전 고정 필수:
 ```
 pip install fastai==1.0.61
 ```
 
 ---
 
-# 📌 7. 설치 및 실행 가이드
+# 📌 8. 설치 및 실행
 
-## ✔ 가상환경 생성
+### ✔ 가상환경 구성
 ```
 conda create -n colorization python=3.8
 conda activate colorization
 ```
 
-## ✔ 필수 패키지 설치
+### ✔ 필수 패키지 설치
 ```
 pip install flask numpy opencv-python Pillow werkzeug
 pip install deoldify fastai==1.0.61
 ```
 
-## ✔ 모델 다운로드  
-아래 링크에서 모델 파일을 다운로드하고 `models/` 폴더에 넣는다.
+### ✔ 모델 파일 다운로드  
+> 다운로드 후 `models/` 폴더에 넣기
 
-### 🔗 **OpenCV Caffe 모델 다운로드**  
-https://github.com/richzhang/colorization/tree/master/models
+- OpenCV 모델 다운로드  
+  https://github.com/richzhang/colorization/tree/master/models
 
-### 🔗 **DeOldify 모델 다운로드(Artistic)**  
-https://deepai.org/machine-learning-model/colorizer
+- DeOldify 모델 다운로드  
+  https://deepai.org/machine-learning-model/colorizer  
 
 ---
 
-# 📁 프로젝트 폴더 구조
+# 📁 9. 프로젝트 구조
 
 ```
 project/
@@ -140,6 +167,12 @@ project/
  │     ├── colorization_deploy_v2.prototxt
  │     └── pts_in_hull.npy
  ├── image/
+ │     ├── 1.png
+ │     ├── 2.png
+ │     ├── 3.png
+ │     ├── 4.png
+ │     ├── 6.png
+ │     └── 7.png
  ├── static/
  ├── templates/
  └── README.md
@@ -147,14 +180,12 @@ project/
 
 ---
 
-# 📌 8. 결론
+# 📌 10. 결론
 
-OpenCV 모델은 속도가 빠르다는 장점이 있지만 품질적으로 서비스 수준에 적합하지 않다.  
-반면, DeOldify는 고품질 복원 능력, 색감, 디테일, 얼굴 복원에서 압도적으로 우수하여  
-최종 서비스 모델로 선정되었다.
-
-또한 Flask 기반 웹 UI로 사용자가 흑백 사진을 손쉽게 컬러로 변환할 수 있도록 구현하였다.
+OpenCV 모델은 빠르지만 품질 문제로 사용을 중단했다.  
+DeOldify 모델은 고품질 복원, 자연스러운 색감, 얼굴 디테일 복원이 뛰어나  
+실사용·웹서비스 모두에 적합하여 최종 채택 모델로 결정했다.
 
 ---
 
-# ✔ README 파일 생성 완료
+# ✔ README 생성 완료 (이미지·설명·링크 전체 포함)
