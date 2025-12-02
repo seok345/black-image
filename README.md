@@ -1,128 +1,162 @@
-# AI 흑백 사진 컬러 복원 웹 애플리케이션 
 
-Deep Learning based Image Colorization Project
+# 🎨 AI 흑백 사진 컬러 복원 웹 애플리케이션  
+### *DeOldify + Flask 기반 이미지 자동 색채 복원 서비스*
 
-흑백 이미지에 생명을 불어넣다: DeOldify와 Flask를 활용한 고해상도 이미지 복원 서비스
+---
 
-## 프로젝트 개요 
+# 📌 1. 프로젝트 개요
 
-### 1. 배경 및 목적
+오래된 흑백 사진은 색상이 없어 당시의 분위기나 감정 전달력이 낮다.  
+본 프로젝트는 DeOldify GAN 모델을 활용해 흑백 이미지를 **고품질 컬러 이미지로 자동 변환하는 웹 서비스**를 구축하는 것이다.
 
-오래된 흑백 사진은 소중한 역사와 추억을 담고 있지만, 색상 정보의 부재로 인해 당시의 현장감이나 감정을 온전히 느끼기에는 한계가 있습니다. 본 프로젝트는 최신 딥러닝 기술인 Generative Adversarial Networks (GANs), 그중에서도 탁월한 성능을 보여주는 DeOldify 모델을 활용하여 누구나 쉽게 흑백 사진을 고화질의 컬러 사진으로 복원할 수 있는 웹 서비스를 구축하는 것을 목표로 합니다.
+---
 
-### 2. 핵심 가치
+# 📌 2. 배경 및 필요성
 
-접근성(Accessibility): 복잡한 코드를 실행할 필요 없이, 웹 브라우저에서 사진을 업로드하는 것만으로 AI 기술을 활용할 수 있습니다.
+- 흑백 사진이 가진 정보적 한계를 보완한다.  
+- AI 기반 복원 기술을 웹 환경에서 누구나 쉽게 사용할 수 있도록 한다.  
+- DeOldify 모델을 최신 환경(Python, PyTorch)에서 안정적으로 구동시키기 위한 기술적 해결 과정이 의미 있다.
 
-심미성(Aesthetics): 단순한 색상 복원을 넘어, 'Artistic' 모델을 적용하여 예술적이고 생동감 넘치는 색감을 구현합니다.
+---
 
-기술적 해결(Problem Solving): 레거시 AI 모델(FastAI v1)과 최신 실행 환경(PyTorch v2) 간의 호환성 문제를 기술적으로 해결하여 안정적인 서비스를 제공합니다.
+# 📌 3. 주요 기능
 
-## 주요 기능 
+## ✔ 이미지 업로드  
+이미지 파일(JPG, PNG 등)을 서버에서 받아 모델 입력 형태로 전처리한다.
 
-이미지 업로드 및 전처리: 사용자가 업로드한 다양한 포맷(JPG, PNG)의 이미지를 서버에서 안전하게 수신하고 모델 입력에 맞게 전처리합니다.
+## ✔ AI 기반 자동 컬러 복원  
+DeOldify 모델이 회색조 픽셀의 패턴과 맥락을 분석해 자연스러운 색상을 생성한다.
 
-AI 기반 자동 채색: DeOldify 모델이 이미지의 객체와 맥락(Context)을 분석하여 픽셀 단위로 색상을 예측 및 합성합니다.
+## ✔ 결과 비교  
+흑백 원본과 컬러 복원본을 나란히 보여준다.
 
-실시간 결과 비교: 원본 흑백 이미지와 변환된 컬러 이미지를 나란히 배치하여 복원 효과를 직관적으로 확인할 수 있습니다.
+## ✔ 고화질 결과 다운로드  
+최종 결과를 이미지 파일로 다운로드할 수 있다.
 
-고해상도 다운로드: 변환된 결과물을 저장이 가능한 고화질 이미지 파일로 제공합니다.
+---
 
-## 기술 스택 
+# 📌 4. 기술 스택
 
-본 프로젝트는 안정적인 백엔드 처리와 강력한 AI 성능을 위해 다음과 같은 기술을 사용했습니다.
+### Backend
+- Python  
+- Flask  
+- OpenCV  
+- NumPy  
 
-### Backend & Server
-
-Python 3.x: 프로젝트의 주 언어로, 풍부한 AI 라이브러리 생태계를 활용합니다.
-
-Flask: 가볍고 확장성이 뛰어난 마이크로 웹 프레임워크로, 빠르고 효율적인 이미지 처리 서버를 구축했습니다.
-
-### AI & Deep Learning
-
-DeOldify: NoGAN 기술을 도입하여 GAN의 불안정성을 해결하고 일관된 고품질 채색을 수행하는 핵심 모델입니다. (ResNet34 Backbone 사용)
-
-PyTorch & FastAI: 딥러닝 모델의 학습 및 추론(Inference)을 담당하는 프레임워크입니다.
-
-OpenCV & NumPy: 이미지 데이터의 행렬 연산 및 전처리/후처리를 담당합니다.
+### AI / Deep Learning
+- **DeOldify** (NoGAN 기반)  
+- FastAI 1.x  
+- PyTorch  
 
 ### Frontend
+- HTML5, CSS3  
+- Tailwind CSS  
 
-HTML5 & CSS3: 시맨틱 마크업과 스타일링을 담당합니다.
+---
 
-Tailwind CSS: 유틸리티 퍼스트 CSS 프레임워크를 사용하여 반응형 디자인과 모던한 UI를 신속하게 구현했습니다.
+# 📌 5. 설치 및 실행 방법
 
-## 설치 및 실행 가이드
-
-이 프로젝트는 DeOldify 모델의 특성상 특정 라이브러리 버전과의 의존성이 매우 중요합니다. 아래 절차를 정확히 따라주세요.
-
-### 1. 환경 설정
-
-Python 3.7 이상이 설치된 환경에서 진행하는 것을 권장합니다. 충돌 방지를 위해 가상환경(Virtual Environment) 사용을 추천합니다.
-
-### 가상환경 생성
+## ✔ 1) 가상환경 구성
+```
 conda create -n colorization python=3.8
 conda activate colorization
+```
 
-
-### 2. 필수 라이브러리 설치
-
-프로젝트 루트 디렉토리에서 다음 명령어를 실행하여 의존성 패키지를 설치합니다.
-
-### 1. 웹 서버 및 이미지 처리를 위한 기본 패키지
+## ✔ 2) 필수 패키지 설치
+```
 pip install flask numpy opencv-python Pillow werkzeug
-
-### 2. AI 모델 구동을 위한 핵심 패키지 (버전 준수 필수)
- DeOldify는 FastAI 1.x 버전에 최적화되어 있습니다.
 pip install deoldify fastai==1.0.61
+```
 
+※ fastai는 반드시 1.0.61 버전을 사용해야 한다.
 
-주의: GPU(CUDA)를 사용하려면 시스템에 맞는 PyTorch 버전을 확인해야 합니다. 일반적인 CPU 환경에서는 위 명령어로 충분합니다.
+## ✔ 3) 모델 가중치 다운로드
+파일명:
+```
+ColorizeArtistic_gen.pth
+```
+→ `models/` 디렉토리에 저장한다.
 
-### 3. 모델 가중치 준비
+## ✔ 4) 실행
+```
+python app.py
+```
+브라우저 접속:
+```
+http://127.0.0.1:5000
+```
 
-AI 모델이 학습한 데이터 파일이 필요합니다.
+---
 
-파일명: ColorizeArtistic_gen.pth
+# 📌 6. 기술적 문제 해결(트러블슈팅)
 
-다운로드:  모델 다운로드 링크 (DeepAI)
+## 🔧 Issue 1 — PyTorch 보안 정책 변경으로 인한 모델 로딩 오류  
+PyTorch 2.6 이후 `.pth` 로드 시 pickle 형태의 객체 로딩이 차단되어  
+구버전 FastAI 기반 DeOldify 모델이 정상 로드되지 않는다.
 
-위치: 다운로드한 파일을 프로젝트 폴더 내 models/ 디렉토리에 저장합니다.
+### 해결:
+- `torch.load`에 대해 Monkey-Patching  
+- `weights_only=False` 강제 지정  
+- `torch.serialization.add_safe_globals`로 필요한 클래스 목록 Allowlist 등록
 
-### 5. 서비스 이용
+---
 
-웹 브라우저를 열고 http://127.0.0.1:5000에 접속하여 흑백 사진을 업로드하세요.
+## 🔧 Issue 2 — fastai 최신 버전 비호환  
+fastai 최신 버전은 DeOldify 내부 API와 구조가 달라 실행되지 않는다.
 
-## 트러블슈팅 및 기술적 챌린지 
+### 해결:  
+```
+pip install fastai==1.0.61
+```
+으로 버전 고정(pinning)하여 문제 해결.
 
-개발 과정에서 발생한 주요 기술적 문제와 이를 해결한 과정입니다.
+---
 
-### Issue 1: PyTorch 보안 정책 충돌 
+# 📸 7. 서비스 화면 예시
 
-현상: 최신 버전의 PyTorch(2.6+) 환경에서 구형 모델 파일(pickle 방식)을 로드할 때, 보안상의 이유로 functools.partial 등의 내부 객체 로딩이 차단되어 에러 발생.
+## ✔ 첫 화면  
+<img src="image/1.png" width="650">
 
-원인: PyTorch의 torch.load 함수가 기본적으로 weights_only=True로 설정되어 코드 실행을 포함한 객체 로딩을 막음.
+## ✔ 로딩 화면  
+<img src="image/2.png" width="650">
 
-해결:
+## ✔ 결과 화면  
+<img src="image/3.png" width="650">
 
-app.py 코드 내에서 torch.load 함수를 오버라이딩(Monkey Patching)하여 강제로 weights_only=False 옵션을 적용.
+---
 
-torch.serialization.add_safe_globals를 사용하여 Recorder, Hook, Conv2d 등 모델에 사용된 클래스들을 안전한 리스트(Allowlist)에 등록하여 호환성 확보.
+# 📌 8. 향후 발전 방향
 
-### Issue 2: 라이브러리 버전 비호환성 
+### 🟣 흑백 영상 컬러 복원  
+프레임 단위로 컬러 복원 후 다시 합성하는 기능 개발 예정
 
-현상: pip install fastai로 최신 버전을 설치할 경우, DeOldify 코드 내부에서 사용하는 모듈 경로와 API가 달라 실행 불가.
+### 🟣 모델 선택 옵션 제공  
+- Artistic 모델  
+- Stable 모델  
+사용자가 선택 가능하도록 확장
 
-해결: fastai==1.0.61로 버전을 명시적으로 고정(Pinning)하여 DeOldify가 의도한 실행 환경을 정확히 재현함.
+### 🟣 클라우드 서비스화  
+Docker를 활용해 AWS·GCP에 배포하고 외부 접속 허용 서비스로 확장 예정
 
-![페이지 처음 화면](image/1.png)
-![로딩 화면 ](image/2.png)
-![결과 화면](image/3.png)
+---
 
-### 향후 발전 계획
+# 📁 프로젝트 구성
 
-비디오 컬러 복원: 단일 이미지를 넘어 흑백 동영상 파일(MP4)을 프레임 단위로 변환하여 합치는 기능 추가.
+```
+project/
+ ├── app.py
+ ├── models/
+ │     └── ColorizeArtistic_gen.pth
+ ├── static/
+ ├── templates/
+ ├── image/
+ │     ├── 1.png
+ │     ├── 2.png
+ │     └── 3.png
+ └── README.md
+```
 
-모델 선택 옵션: 'Artistic' 모델 외에 원본을 최대한 보존하는 'Stable' 모델 선택 기능 추가.
+---
 
-클라우드 배포: Docker 컨테이너화를 통해 AWS나 Google Cloud Platform에 배포하여 외부 접속 허용.
+# ✔ README 파일 생성됨
+
