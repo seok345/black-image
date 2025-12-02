@@ -26,7 +26,7 @@
 # 📌 2. 비교 모델 소개
 
 ## 🔵 (A) OpenCV Colorization (Caffe) 모델  
-<img src="image/6.png" width="650">
+<img src="image/4.png" width="650">
 
 ### 장점  
 - 속도가 매우 빠르다.  
@@ -44,7 +44,7 @@
 ---
 
 ## 🟣 (B) DeOldify 모델 (최종 선택)  
-<img src="4.png" width="650">
+<img src="image/5.png" width="650">
 
 ### 장점  
 - 얼굴, 배경, 재질 등 맥락 이해가 매우 뛰어나다  
