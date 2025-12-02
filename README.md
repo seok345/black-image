@@ -1,14 +1,6 @@
 
 # 🎨 AI 흑백 사진 컬러 복원 웹 애플리케이션  
 ### *DeOldify 기반 고품질 이미지 컬러 복원 서비스 (업데이트된 프로젝트 구조 반영)*
-
----
-
-# ⚠️ 작성 규칙  
-- 평어체(~이다, ~한다)  
-- 경어체 금지  
-- GitHub 구조에 맞게 이미지 경로를 **image/파일명.png** 형식으로 통일  
-
 ---
 
 # 📌 1. 프로젝트 개요
@@ -16,38 +8,6 @@
 본 프로젝트는 AI 기반으로 흑백 사진을 컬러 사진으로 변환하는 웹 서비스이다.  
 초기에는 OpenCV Colorization 모델을 사용했으나 품질 문제가 있어  
 최종적으로 **DeOldify 모델**을 사용해 고품질 컬러 복원을 제공한다.
-
----
-
-# 📌 2. 최종 프로젝트 폴더 구조
-
-```
-PythonProject11/
- ├── model/
- │    ├── colorization_deploy_v2.prototxt
- │    ├── colorization_release_v2.caffemodel
- │    ├── places2.prototxt
- │    └── pts_in_hull.npy
- │
- ├── models/
- │    └── ColorizeArtistic_gen.pth
- │
- ├── result_images/
- │    └── (복원 완료 이미지 저장)
- │
- ├── static/
- │    └── styles.css
- │
- ├── templates/
- │    └── index.html
- │
- ├── uploads/
- │    └── (사용자 업로드 이미지)
- │
- ├── app.py
- ├── model2.py
- └── README.md
-```
 
 ---
 
@@ -132,6 +92,38 @@ https://deepai.org/machine-learning-model/colorizer
 https://github.com/richzhang/colorization/tree/master/models
 
 ---
+---
+
+# 📌 2. 최종 프로젝트 폴더 구조
+
+```
+PythonProject11/
+ ├── model/
+ │    ├── colorization_deploy_v2.prototxt
+ │    ├── colorization_release_v2.caffemodel
+ │    ├── places2.prototxt
+ │    └── pts_in_hull.npy
+ │
+ ├── models/
+ │    └── ColorizeArtistic_gen.pth
+ │
+ ├── result_images/
+ │    └── (복원 완료 이미지 저장)
+ │
+ ├── static/
+ │    └── styles.css
+ │
+ ├── templates/
+ │    └── index.html
+ │
+ ├── uploads/
+ │    └── (사용자 업로드 이미지)
+ │
+ ├── app.py
+ ├── model2.py
+ └── README.md
+```
+
 
 # 📌 8. 결론
 
@@ -141,4 +133,3 @@ DeOldify는 고품질 컬러 복원이 가능해 실제 서비스에 적합하�
 
 ---
 
-# ✔ README 최신 버전 생성 완료 (이미지 경로 정렬됨)
