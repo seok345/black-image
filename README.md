@@ -19,7 +19,7 @@
 ## 🔵 (A) OpenCV Colorization (Caffe Model)
 
 <div align="center">
-<img src="image/6.png" width="600">
+<img src="image/4.png" width="600">
 </div>
 
 ### ✔ 장점  
@@ -40,7 +40,7 @@ https://github.com/richzhang/colorization/tree/master/models
 ## 🟣 (B) DeOldify (최종 채택)
 
 <div align="center">
-<img src="image/4.png" width="600">
+<img src="image/5.png" width="600">
 </div>
 
 ### ✔ 장점  
@@ -90,7 +90,7 @@ https://github.com/richzhang/colorization/tree/master/models
 
 ## ✔ 최종 컬러 복원 결과
 <div align="center">
-<img src="image/3.png" width="700">
+<img src="image/11.png" width="700">
 </div>
 
 ---
@@ -109,7 +109,7 @@ OpenCV 기반 방식은 최종 서비스에서 제외했다.
 # 📌 6. 전체 동작 구조 (개발 환경 화면 포함)
 
 <div align="center">
-<img src="image/7.png" width="750">
+<img src="image/10.png" width="750">
 </div>
 
 ---
@@ -187,5 +187,3 @@ DeOldify 모델은 고품질 복원, 자연스러운 색감, 얼굴 디테일 �
 실사용·웹서비스 모두에 적합하여 최종 채택 모델로 결정했다.
 
 ---
-
-# ✔ README 생성 완료 (이미지·설명·링크 전체 포함)
