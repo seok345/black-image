@@ -1,162 +1,157 @@
 
 # 🎨 AI 흑백 사진 컬러 복원 웹 애플리케이션  
-### *DeOldify + Flask 기반 이미지 자동 색채 복원 서비스*
+### *DeOldify vs OpenCV 기반 모델 비교 + 웹 서비스 구현 보고서*
+
+---
+
+# ⚠️ 작성 규칙  
+- **평어체(~이다, ~한다) 사용**  
+- **경어체 금지**  
+- **이미지 자료 최대한 활용**  
 
 ---
 
 # 📌 1. 프로젝트 개요
 
-오래된 흑백 사진은 색상이 없어 당시의 분위기나 감정 전달력이 낮다.  
-본 프로젝트는 DeOldify GAN 모델을 활용해 흑백 이미지를 **고품질 컬러 이미지로 자동 변환하는 웹 서비스**를 구축하는 것이다.
+본 프로젝트는 두 가지 AI 채색 방식을 비교하고, 최종적으로 DeOldify 기반으로 고화질 자동 컬러 복원 웹 서비스를 구축하는 것을 목표로 한다.
+
+## 사용된 두 가지 모델  
+### 🔵 (A) OpenCV 딥러닝 기반 Colorization 모델  
+- 구조: Caffe 기반 네트워크  
+- 파일 구성:  
+  - `colorization_release_v2.caffemodel`  
+  - `colorization_deploy_v2.prototxt`  
+  - `pts_in_hull.npy`  
+
+### 🟣 (B) DeOldify (GAN / NoGAN 기반)  
+- ResNet34 기반 Encoder  
+- FastAI + PyTorch  
+- 고화질(High-Resolution) 예술적(Artistic) 채색 가능  
 
 ---
 
-# 📌 2. 배경 및 필요성
+# 📌 2. 비교 모델 소개
 
-- 흑백 사진이 가진 정보적 한계를 보완한다.  
-- AI 기반 복원 기술을 웹 환경에서 누구나 쉽게 사용할 수 있도록 한다.  
-- DeOldify 모델을 최신 환경(Python, PyTorch)에서 안정적으로 구동시키기 위한 기술적 해결 과정이 의미 있다.
+## 🔵 (A) OpenCV Colorization (Caffe) 모델  
+<img src="6.png" width="650">
 
----
+### 장점  
+- 속도가 매우 빠르다.  
+- GPU 없어도 빠르게 동작한다.  
+- 설치가 간단하다.
 
-# 📌 3. 주요 기능
+### 단점  
+- 색이 **전체적으로 탁하게 나옴**  
+- 디테일이 부족함  
+- 상황 이해(Context)가 약함  
+- 아래처럼 **흑백→검정 화면 오류**가 자주 발생함  
 
-## ✔ 이미지 업로드  
-이미지 파일(JPG, PNG 등)을 서버에서 받아 모델 입력 형태로 전처리한다.
-
-## ✔ AI 기반 자동 컬러 복원  
-DeOldify 모델이 회색조 픽셀의 패턴과 맥락을 분석해 자연스러운 색상을 생성한다.
-
-## ✔ 결과 비교  
-흑백 원본과 컬러 복원본을 나란히 보여준다.
-
-## ✔ 고화질 결과 다운로드  
-최종 결과를 이미지 파일로 다운로드할 수 있다.
+<img src="6.png" width="650">
 
 ---
 
-# 📌 4. 기술 스택
+## 🟣 (B) DeOldify 모델 (최종 선택)  
+<img src="4.png" width="650">
 
-### Backend
-- Python  
-- Flask  
-- OpenCV  
-- NumPy  
+### 장점  
+- 얼굴, 배경, 재질 등 맥락 이해가 매우 뛰어나다  
+- 색감이 자연스럽고 풍부하다  
+- 고해상도 복원이 가능하다  
+- 결과물 품질이 웹 서비스 수준으로 충분히 높다  
 
-### AI / Deep Learning
-- **DeOldify** (NoGAN 기반)  
-- FastAI 1.x  
-- PyTorch  
-
-### Frontend
-- HTML5, CSS3  
-- Tailwind CSS  
+### 단점  
+- 모델 용량이 크다  
+- FastAI 1.x 버전 고정 필요  
+- PyTorch 최신 버전과 호환 이슈 존재  
+- CPU 단독 사용 시 속도가 느리다  
 
 ---
 
-# 📌 5. 설치 및 실행 방법
+# 📌 3. OpenCV 모델 사용 당시 문제 분석
 
-## ✔ 1) 가상환경 구성
-```
-conda create -n colorization python=3.8
-conda activate colorization
-```
+기존 OpenCV 기반 프로젝트에서는 다음과 같은 문제가 지속 발생했다:
 
-## ✔ 2) 필수 패키지 설치
-```
-pip install flask numpy opencv-python Pillow werkzeug
-pip install deoldify fastai==1.0.61
-```
+### ⚠️ 문제 1 — 출력 이미지가 검정색으로 나옴  
+- BGR-Lab 변환 과정에서 데이터 스케일 오류  
+- 모델 Input/Output 텐서 범위 mismatch  
+- Caffe 기반 Colormap 적용 문제
 
-※ fastai는 반드시 1.0.61 버전을 사용해야 한다.
+### ⚠️ 문제 2 — 사람 얼굴 영역 채색이 매우 부자연스러움  
+- GAN 기반이 아니라 픽셀 패턴 기반이라 디테일 부족
 
-## ✔ 3) 모델 가중치 다운로드
-파일명:
-```
-ColorizeArtistic_gen.pth
-```
-→ `models/` 디렉토리에 저장한다.
-
-## ✔ 4) 실행
-```
-python app.py
-```
-브라우저 접속:
-```
-http://127.0.0.1:5000
-```
+### ⚠️ 문제 3 — 고해상도 복원 불가  
+- 256px 근처의 해상도 품질 한계
 
 ---
 
-# 📌 6. 기술적 문제 해결(트러블슈팅)
+# 📌 4. DeOldify 모델 사용 후 개선점
 
-## 🔧 Issue 1 — PyTorch 보안 정책 변경으로 인한 모델 로딩 오류  
-PyTorch 2.6 이후 `.pth` 로드 시 pickle 형태의 객체 로딩이 차단되어  
-구버전 FastAI 기반 DeOldify 모델이 정상 로드되지 않는다.
+OpenCV 대비 아래와 같은 향상 효과가 나타났다:
 
-### 해결:
-- `torch.load`에 대해 Monkey-Patching  
-- `weights_only=False` 강제 지정  
-- `torch.serialization.add_safe_globals`로 필요한 클래스 목록 Allowlist 등록
+<img src="4.png" width="700">
 
----
-
-## 🔧 Issue 2 — fastai 최신 버전 비호환  
-fastai 최신 버전은 DeOldify 내부 API와 구조가 달라 실행되지 않는다.
-
-### 해결:  
-```
-pip install fastai==1.0.61
-```
-으로 버전 고정(pinning)하여 문제 해결.
+| 항목 | OpenCV 모델 | DeOldify 모델 |
+|------|-------------|---------------|
+| 색감 | 전체적으로 탁함 | 자연스럽고 선명함 |
+| 디테일 | 얼굴/피부 처리 약함 | 얼굴 복원 능력이 매우 뛰어남 |
+| 고해상도 | 불가 | 가능 |
+| 맥락 이해 | 매우 약함 | 매우 강함 |
+| 속도 | 빠름 | 상대적으로 느림 |
+| 웹 서비스 적합성 | 낮음 | 매우 높음 |
 
 ---
 
-# 📸 7. 서비스 화면 예시
-
-## ✔ 첫 화면  
-<img src="image/1.png" width="650">
-
-## ✔ 로딩 화면  
-<img src="image/2.png" width="650">
-
-## ✔ 결과 화면  
-<img src="image/3.png" width="650">
+# 📌 5. 최종 웹 서비스 구조  
+<img src="7.png" width="700">
 
 ---
 
-# 📌 8. 향후 발전 방향
+# 📸 6. 웹 서비스 UI
 
-### 🟣 흑백 영상 컬러 복원  
-프레임 단위로 컬러 복원 후 다시 합성하는 기능 개발 예정
+## 초기 화면  
+<img src="1.png" width="700">
 
-### 🟣 모델 선택 옵션 제공  
-- Artistic 모델  
-- Stable 모델  
-사용자가 선택 가능하도록 확장
+## 업로드 + 변환 결과 화면  
+<img src="2.png" width="700">
 
-### 🟣 클라우드 서비스화  
-Docker를 활용해 AWS·GCP에 배포하고 외부 접속 허용 서비스로 확장 예정
+## 최종 컬러 복원 결과  
+<img src="3.png" width="700">
 
 ---
 
-# 📁 프로젝트 구성
+# 📌 7. 기술적 문제 해결
 
-```
-project/
- ├── app.py
- ├── models/
- │     └── ColorizeArtistic_gen.pth
- ├── static/
- ├── templates/
- ├── image/
- │     ├── 1.png
- │     ├── 2.png
- │     └── 3.png
- └── README.md
-```
+## 🔧 FastAI 1.x vs PyTorch 최신 버전 충돌 해결  
+- PyTorch 2.x에서 `.pth` 로드 시 pickle 구조 차단됨  
+- DeOldify 모델은 pickle 객체 기반이라 오류 발생  
+
+### 해결 전략  
+- `torch.load` Monkey-Patching  
+- `weights_only=False` 강제 적용  
+- `torch.serialization.add_safe_globals`로 필요한 객체 Whitelist 등록  
+
+## 🔧 CUDA/GPU 환경 문제  
+- GPU가 없는 환경에서는 inference 속도가 느림 → batch 단위 최적화  
+- 이미지 resolution을 단계별 스케일링하여 속도 개선
 
 ---
 
-# ✔ README 파일 생성됨
+# 📌 8. 결론
 
+OpenCV 기반 컬러 복원은 속도가 빠르다는 점은 장점이지만  
+품질이 실 서비스 기준에 미치지 못하여 사용을 중단하였다.
+
+DeOldify 모델은  
+- 색감 품질  
+- 디테일  
+- 맥락 이해 능력  
+- 사용자 경험  
+
+모든 면에서 월등하여 **최종 선택 모델**로 결정되었다.
+
+또한 Flask 기반으로 웹 UI를 구성하여  
+사용자가 손쉽게 흑백 사진을 업로드하고 결과를 확인할 수 있도록 했다.
+
+---
+
+# ✔ 완성된 README 보고서 파일 생성됨
