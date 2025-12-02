@@ -26,7 +26,7 @@
 # 📌 2. 비교 모델 소개
 
 ## 🔵 (A) OpenCV Colorization (Caffe) 모델  
-<img src="6.png" width="650">
+<img src="image/6.png" width="650">
 
 ### 장점  
 - 속도가 매우 빠르다.  
@@ -39,7 +39,7 @@
 - 상황 이해(Context)가 약함  
 - 아래처럼 **흑백→검정 화면 오류**가 자주 발생함  
 
-<img src="6.png" width="650">
+<img src="image/6.png" width="650">
 
 ---
 
@@ -81,7 +81,7 @@
 
 OpenCV 대비 아래와 같은 향상 효과가 나타났다:
 
-<img src="4.png" width="700">
+<img src="image/4.png" width="700">
 
 | 항목 | OpenCV 모델 | DeOldify 모델 |
 |------|-------------|---------------|
@@ -95,20 +95,20 @@ OpenCV 대비 아래와 같은 향상 효과가 나타났다:
 ---
 
 # 📌 5. 최종 웹 서비스 구조  
-<img src="7.png" width="700">
+<img src="image/7.png" width="700">
 
 ---
 
 # 📸 6. 웹 서비스 UI
 
 ## 초기 화면  
-<img src="1.png" width="700">
+<img src="image/1.png" width="700">
 
 ## 업로드 + 변환 결과 화면  
-<img src="2.png" width="700">
+<img src="image/2.png" width="700">
 
 ## 최종 컬러 복원 결과  
-<img src="3.png" width="700">
+<img src="image/3.png" width="700">
 
 ---
 
