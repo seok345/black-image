@@ -42,7 +42,7 @@
 - 고해상도 입력 시 색 반영 실패  
 - 아래와 같은 사례(=검정화) 빈번히 발생함
 
-<img src="image/6.png" width="700">
+<img src="image/4.png" width="700">
 
 ---
 
