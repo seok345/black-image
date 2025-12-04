@@ -59,7 +59,7 @@
 - 풍경/건물/배경 색조합 현실적
 - UI 서비스에 안정적으로 적용 가능
 
-<img src="image5.png" width="700">
+<img src="image/5.png" width="700">
 
 ---
 
