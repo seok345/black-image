@@ -42,7 +42,7 @@
 - 고해상도 입력 시 색 반영 실패  
 - 아래와 같은 사례(=검정화) 빈번히 발생함
 
-<img src="6 (1).png" width="700">
+<img src="image/6.png" width="700">
 
 ---
 
@@ -59,20 +59,20 @@
 - 풍경/건물/배경 색조합 현실적
 - UI 서비스에 안정적으로 적용 가능
 
-<img src="5.png" width="700">
+<img src="image5.png" width="700">
 
 ---
 
 # 📌 5. 웹 서비스 흐름 (UI 단계별 이미지 포함)
 
 ## ① 업로드 화면
-<img src="1.png" width="700">
+<img src="image/1.png" width="700">
 
 ## ② 로딩/처리 화면
-<img src="2.png" width="700">
+<img src="image/2.png" width="700">
 
 ## ③ 결과 비교 화면
-<img src="3.png" width="700">
+<img src="image/3.png" width="700">
 
 ---
 
